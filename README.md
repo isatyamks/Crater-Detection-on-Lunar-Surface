@@ -1,4 +1,5 @@
-# Crater and Boulder Detection from OHRC Images
+
+![cover-logo](https://github.com/isatyamks/Shershaah/assets/121108110/6ade2302-cafa-4015-a7ee-3c68f917b025)
 
 ## Team: Shershaah
 
