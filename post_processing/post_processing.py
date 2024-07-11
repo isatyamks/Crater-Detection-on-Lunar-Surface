@@ -6,7 +6,7 @@ def draw_bounding_boxes(image, circles):
     if circles is not None:
         for i in circles[0, :]:
             # Draw the outer circle
-            cv2.circle(output_image, (i[0], i[1]), i[2], (255, 0, 0), 2)
+            cv2.circle(output_image, (i[0], i[1]), i[2], (255, 255, 0), 2)
             # Draw the center of the circle
             cv2.circle(output_image, (i[0], i[1]), 2, (255, 0, 0), 3)
             # Label the crater
