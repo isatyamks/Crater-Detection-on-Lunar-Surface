@@ -31,10 +31,10 @@ To get started with this project, follow the instructions below:
 
 To use the model for detecting craters on lunar images, follow these steps:
 
-1. Prepare your OHRC images and place them in the `data/images` directory.
+1. Prepare your OHRC images and place them in the `datasets/train` directory.
 2. Run the detection script:
     ```bash
-    python detect_craters.py
+    samples\crater\inspect_crater_data.ipynb
     ```
 3. The results will be saved in the `output` directory with the detected craters highlighted.
 
