@@ -49,12 +49,6 @@ To use the model for detecting craters on lunar images, follow these steps:
 
 For a complete list of dependencies, refer to the `requirements.txt` file.
 
-## Team Members
-
-- **Member 1**: [GitHub Profile](https://github.com/isatyamks)
-- **Member 2**: [GitHub Profile]
-- **Member 3**: [GitHub Profile]
-- **Member 4**: [GitHub Profile]
 
 ## Contributing
 
