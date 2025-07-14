@@ -1,7 +1,5 @@
 # Crater Detection on Lunar Surface
 
-![Project Banner](docs/banner.png)
-
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/)
 
@@ -12,7 +10,6 @@ This project provides an end-to-end pipeline for detecting craters on lunar surf
 - **Modular, easy-to-understand codebase**
 - **Video and image inference**
 - **Safe landing zone detection**
-- **Explainable Jupyter notebook**
 - **Ready for research and deployment**
 
 ## Features
@@ -35,25 +32,30 @@ Crater-Detection-on-Lunar-Surface/
 │   ├── video_utils.py
 │   ├── image_utils.py
 │   ├── visualization.py
-│   └── main.py
 │
-├── notebooks/
-│   └── crater_detection_explained.ipynb
-│
-├── data/
-│   └── ... (model weights, datasets)
-│
-├── images/
-│   └── example_detection.jpg
-│   └── safe_landing_zone.jpg
-│
-├── videos/
-│   └── example_detection.mp4
-│
-├── README.md
+├── main.py
 ├── requirements.txt
-├── .gitignore
-└── LICENSE
+├── weights/
+│   ├── best.pt
+│   ├── last.pt
+│   └── args.yaml
+├── report/
+│   └── Report_A1/
+│       ├── val_batch0_pred.jpg
+│       ├── val_batch1_pred.jpg
+│       ├── val_batch2_pred.jpg
+│       └── ...
+├── result/
+│   └── model_A1/
+│       ├── predicted_image.jpg
+│       └── video_craters.csv
+├── testing/
+│   ├── images/
+│   │   └── image.png
+│   └── videos/
+│       └── video.mp4
+├── README.md
+└── ...
 ```
 
 ## Setup
@@ -68,18 +70,18 @@ Crater-Detection-on-Lunar-Surface/
    pip install -r requirements.txt
    ```
 3. **Download model weights:**
-   - Place your YOLOv8 weights in `data/runs/detect/crater_model/weights/best.pt`.
+   - Place your YOLOv8 weights in `weights/best.pt`.
 
 ## Usage
 
 ### Video Inference
 ```bash
-python src/main.py --input_video path/to/video.mp4 --output_video path/to/output.mp4
+python main.py --input_video path/to/video.mp4 --output_video path/to/output.mp4
 ```
 
 ### Image Inference
 ```bash
-python src/main.py --input_image path/to/image.png --output_image path/to/output.jpg
+python main.py --input_image path/to/image.png --output_image path/to/output.jpg
 ```
 
 ### CLI Options
@@ -88,19 +90,35 @@ python src/main.py --input_image path/to/image.png --output_image path/to/output
 - `--input_image`: Path to input image
 - `--output_image`: Path to save annotated image
 - `--conf`: Confidence threshold (default: 0.5)
-- `--window_size`: Safe zone window size (default: 100,100)
+- `--window_size`: Safe zone window size (default: 100 100)
 - `--stride`: Sliding window stride (default: 20)
+- `--weights`: Path to YOLO model weights (default: weights/best.pt)
+- `--max_craters`: Maximum number of craters allowed in a safe landing window (default: 0)
 
 ## Example Results
 
-### Crater Detection (Image)
-![Detection Example](images/example_detection.jpg)
+> **To display images or videos in the README:**
+> - Move/copy your desired output images (e.g., `result/model_A1/predicted_image.jpg` or any from `report/Report_A1/`) to an `images/` folder at the root, and reference as:
+>   ```markdown
+>   ![Detection Example](images/predicted_image.jpg)
+>   ```
+> - For videos, move/copy to a `videos/` folder at the root, and reference as:
+>   ```markdown
+>   ![Video Example](result/model_A1/best.mp4)
+>   ```
+> - Alternatively, upload to an image/video hosting service and use the direct URL.
 
-### Safe Landing Zone (Video)
-![Landing Zone Example](images/safe_landing_zone.jpg)
+### Crater Detection (Image)
+<!-- Example: -->
+<!-- ![Detection Example](images/predicted_image.jpg) -->
+
+### Safe Landing Zone (Image)
+<!-- Example: -->
+<!-- ![Landing Zone Example](images/val_batch0_pred.jpg) -->
 
 ### Video Output
-![Video Example](videos/example_detection.mp4)
+<!-- Example: -->
+<!-- ![Video Example](videos/video.mp4) -->
 
 ## Code Explanation
 - **src/config.py**: Configuration and argument parsing
@@ -109,10 +127,7 @@ python src/main.py --input_image path/to/image.png --output_image path/to/output
 - **src/video_utils.py**: Video reading/writing utilities
 - **src/image_utils.py**: Image reading/writing utilities
 - **src/visualization.py**: Drawing and visualization helpers
-- **src/main.py**: Entry point, CLI, and workflow orchestration
-
-## Jupyter Notebook
-See [`notebooks/crater_detection_explained.ipynb`](notebooks/crater_detection_explained.ipynb) for a step-by-step explanation and visualization of the detection pipeline.
+- **main.py**: Entry point, CLI, and workflow orchestration
 
 ## Contributing
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.

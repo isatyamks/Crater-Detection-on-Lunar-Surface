@@ -23,6 +23,14 @@ def process_video(args, model):
     cap = open_video(args.input_video)
     all_craters = []
     frame_idx = 0
+    # Get video properties for writer
+    frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    fps = cap.get(cv2.CAP_PROP_FPS)
+    writer = None
+    if args.output_video:
+        from src.video_utils import create_writer
+        writer = create_writer(args.output_video, frame_width, frame_height, fps)
     while cap.isOpened():
         ret, frame = cap.read()
         if not ret:
@@ -48,18 +56,20 @@ def process_video(args, model):
             crater['frame'] = frame_idx
         all_craters.extend(crater_info)
         frame_idx += 1
+        if writer is not None:
+            writer.write(annotated)
         cv2.imshow("Craters + Landing Zone", annotated)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
-    release_all(cap)
+    release_all(cap, writer)
     cv2.destroyAllWindows()
     csv_path = os.path.splitext(args.input_video)[0] + '_craters.csv'
     with open(csv_path, 'w', newline='') as csvfile:
         fieldnames = ['frame', 'x_center', 'y_center', 'diameter', 'confidence']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writeheader()
+        writer_csv = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer_csv.writeheader()
         for row in all_craters:
-            writer.writerow(row)
+            writer_csv.writerow(row)
     print(f"Crater info exported to: {csv_path}")
 
 def process_image(args, model):
