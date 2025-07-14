@@ -1,68 +1,121 @@
-# Shershaah: Crater Detection on Lunar Surface
+# Crater Detection on Lunar Surface
 
-Welcome to the Shershaah repository! This project is developed for the Bhartiya Antariksh Hackathon 2024. Our goal is to build an AI/ML model to detect craters on the lunar surface using images from the Orbiter High Resolution Camera (OHRC).
+![Project Banner](docs/banner.png)
 
-## Project Description
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/)
 
-The project aims to automatically detect craters on the Moon's surface utilizing Mask R-CNN, a state-of-the-art deep learning model for object detection and segmentation. The primary data source is the OHRC images, which provide high-resolution imagery essential for accurate crater detection.
+## Overview
 
-## Installation
+This project provides an end-to-end pipeline for detecting craters on lunar surface images and videos using a YOLOv8 deep learning model. It also identifies the safest landing zones by analyzing crater density.
 
-To get started with this project, follow the instructions below:
+- **Modular, easy-to-understand codebase**
+- **Video and image inference**
+- **Safe landing zone detection**
+- **Explainable Jupyter notebook**
+- **Ready for research and deployment**
 
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/isatyamks/shershaah.git
-    cd shershaah
-    ```
+## Features
+- Crater detection using YOLOv8
+- Video and image processing
+- Automatic safe landing zone suggestion
+- Modular, well-documented code
+- CLI for easy usage
+- Visualization and result saving
 
-2. Create a virtual environment and activate it:
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-    ```
+## Project Structure
+```
+Crater-Detection-on-Lunar-Surface/
+│
+├── src/
+│   ├── __init__.py
+│   ├── config.py
+│   ├── model.py
+│   ├── detection.py
+│   ├── video_utils.py
+│   ├── image_utils.py
+│   ├── visualization.py
+│   └── main.py
+│
+├── notebooks/
+│   └── crater_detection_explained.ipynb
+│
+├── data/
+│   └── ... (model weights, datasets)
+│
+├── images/
+│   └── example_detection.jpg
+│   └── safe_landing_zone.jpg
+│
+├── videos/
+│   └── example_detection.mp4
+│
+├── README.md
+├── requirements.txt
+├── .gitignore
+└── LICENSE
+```
 
-3. Install the required dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
+## Setup
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/yourusername/Crater-Detection-on-Lunar-Surface.git
+   cd Crater-Detection-on-Lunar-Surface
+   ```
+2. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. **Download model weights:**
+   - Place your YOLOv8 weights in `data/runs/detect/crater_model/weights/best.pt`.
 
 ## Usage
 
-To use the model for detecting craters on lunar images, follow these steps:
+### Video Inference
+```bash
+python src/main.py --input_video path/to/video.mp4 --output_video path/to/output.mp4
+```
 
-1. Prepare your OHRC images and place them in the `datasets/train` directory.
-2. Run the detection script:
-    ```bash
-    samples\crater\inspect_crater_data.ipynb
-    ```
-3. The results will be saved in the `output` directory with the detected craters highlighted.
+### Image Inference
+```bash
+python src/main.py --input_image path/to/image.png --output_image path/to/output.jpg
+```
 
-## Dependencies
+### CLI Options
+- `--input_video`: Path to input video
+- `--output_video`: Path to save annotated video
+- `--input_image`: Path to input image
+- `--output_image`: Path to save annotated image
+- `--conf`: Confidence threshold (default: 0.5)
+- `--window_size`: Safe zone window size (default: 100,100)
+- `--stride`: Sliding window stride (default: 20)
 
-- Python 3.8+
-- TensorFlow
-- Keras
-- OpenCV
-- NumPy
-- Matplotlib
+## Example Results
 
-For a complete list of dependencies, refer to the `requirements.txt` file.
+### Crater Detection (Image)
+![Detection Example](images/example_detection.jpg)
 
+### Safe Landing Zone (Video)
+![Landing Zone Example](images/safe_landing_zone.jpg)
+
+### Video Output
+![Video Example](videos/example_detection.mp4)
+
+## Code Explanation
+- **src/config.py**: Configuration and argument parsing
+- **src/model.py**: Model loading and inference
+- **src/detection.py**: Crater detection logic
+- **src/video_utils.py**: Video reading/writing utilities
+- **src/image_utils.py**: Image reading/writing utilities
+- **src/visualization.py**: Drawing and visualization helpers
+- **src/main.py**: Entry point, CLI, and workflow orchestration
+
+## Jupyter Notebook
+See [`notebooks/crater_detection_explained.ipynb`](notebooks/crater_detection_explained.ipynb) for a step-by-step explanation and visualization of the detection pipeline.
 
 ## Contributing
-
-We welcome contributions from the community. If you'd like to contribute, please fork the repository, create a feature branch, and submit a pull request. For major changes, please open an issue first to discuss what you would like to change.
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
-
-## Acknowledgments
-
-- The Bhartiya Antariksh Hackathon 2024 organizers for providing this platform.
-- Our mentors and peers for their guidance and support.
-
----
-
-Thank you for visiting our repository. We hope our project contributes to advancements in lunar exploration and AI technology.
+This project is licensed under the MIT License. 
